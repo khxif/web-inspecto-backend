@@ -15,6 +15,10 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 
+app.get('/ping', (req, res) => {
+  res.status(200).json({ message: 'pong' });
+});
+
 app.use('/api/audit', auditRoutes);
 app.use('/api/inngest', serve({ client: inngest, functions }));
 
