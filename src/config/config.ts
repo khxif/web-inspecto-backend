@@ -6,6 +6,7 @@ interface Config {
   geminiApiKey: string;
   inngestSigningKey: string;
   inngestApiUrl: string;
+  inngestEventKey: string; 
 }
 
 const config: Config = {
@@ -13,6 +14,7 @@ const config: Config = {
   geminiApiKey: process.env.GEMINI_API_KEY || '',
   inngestSigningKey: process.env.INNGEST_SIGNING_KEY || '',
   inngestApiUrl: process.env.INNGEST_API_URL || '',
+  inngestEventKey: process.env.INNGEST_EVENT_KEY || '',
 };
 
 export default config;

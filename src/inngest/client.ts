@@ -1,4 +1,4 @@
 import { Inngest } from 'inngest';
+import config from '../config/config.js';
 
-export const inngest = new Inngest({ id: 'web-inspecto' });
-
+export const inngest = new Inngest({ id: 'web-inspecto', eventKey: config.inngestEventKey });
