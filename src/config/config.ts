@@ -22,4 +22,6 @@ const config: Config = {
   chromePath: process.env.CHROME_PATH || '',
 };
 
+console.log('config', config);
+
 export default config;
