@@ -1,13 +1,16 @@
 import dotenv from 'dotenv';
-dotenv.config();
+
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
 interface Config {
   port: number;
   geminiApiKey: string;
   inngestSigningKey: string;
   inngestApiUrl: string;
-  inngestEventKey: string; 
-  chromePath:string
+  inngestEventKey: string;
+  chromePath: string;
 }
 
 const config: Config = {
@@ -16,7 +19,7 @@ const config: Config = {
   inngestSigningKey: process.env.INNGEST_SIGNING_KEY || '',
   inngestApiUrl: process.env.INNGEST_API_URL || '',
   inngestEventKey: process.env.INNGEST_EVENT_KEY || '',
-  chromePath: process.env.CHROME_PATH || '', 
+  chromePath: process.env.CHROME_PATH || '',
 };
 
 export default config;
