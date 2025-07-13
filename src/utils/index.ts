@@ -6,6 +6,11 @@ export async function getRuns(eventId: string) {
       Authorization: `Bearer ${config.inngestSigningKey}`,
     },
   });
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Inngest API Error: ${response.status} ${errorText}`);
+  }
+
   const json = await response.json();
 
   return json.data;
@@ -21,6 +26,6 @@ export async function getRunOutput(eventId: string) {
       throw new Error(`Function run ${runs[0].status}`);
     }
   }
-  
+
   return runs[0];
 }

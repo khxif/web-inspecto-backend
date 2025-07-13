@@ -1,8 +1,6 @@
-import * as ChromeLauncher from 'chrome-launcher';
 import { NextFunction, Request, Response } from 'express';
-import lighthouse from 'lighthouse';
 import { inngest } from '../inngest/client.js';
-import { getRunOutput, getRuns } from '../utils/index.js';
+import { getRunOutput } from '../utils/index.js';
 
 export const performAudit = async (req: Request, res: Response, next: NextFunction) => {
   try {
