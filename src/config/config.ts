@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
-
-if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
-}
+
 
 interface Config {
   port: number;
@@ -11,6 +9,7 @@ interface Config {
   inngestApiUrl: string;
   inngestEventKey: string;
   chromePath: string;
+  nodeEnv: string;
 }
 
 const config: Config = {
@@ -20,6 +19,7 @@ const config: Config = {
   inngestApiUrl: process.env.INNGEST_API_URL || '',
   inngestEventKey: process.env.INNGEST_EVENT_KEY || '',
   chromePath: process.env.CHROME_PATH || '',
+  nodeEnv: process.env.NODE_ENV || '',
 };
 
 console.log('config', config);
