@@ -1,10 +1,8 @@
-import * as ChromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
 import puppeteer from 'puppeteer';
 import { auditSuggestionPrompt } from '../utils/prompts.js';
 import { auditSuggestionAgent } from './agents/suggestion-agent.js';
 import { inngest } from './client.js';
-import { response } from 'express';
 
 export const auditSummary = inngest.createFunction(
   { id: 'perform-audit' },
