@@ -3,6 +3,7 @@ import puppeteer from 'puppeteer';
 import { auditSuggestionPrompt } from '../utils/prompts.js';
 import { auditSuggestionAgent } from './agents/suggestion-agent.js';
 import { inngest } from './client.js';
+import config from '../config/config.js';
 
 export const auditSummary = inngest.createFunction(
   { id: 'perform-audit' },
@@ -12,6 +13,7 @@ export const auditSummary = inngest.createFunction(
       const chrome = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        executablePath: config.chromePath,
       });
 
       const endpoint = chrome.wsEndpoint();

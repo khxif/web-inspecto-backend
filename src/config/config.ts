@@ -7,6 +7,7 @@ interface Config {
   inngestSigningKey: string;
   inngestApiUrl: string;
   inngestEventKey: string; 
+  chromePath:string
 }
 
 const config: Config = {
@@ -15,6 +16,7 @@ const config: Config = {
   inngestSigningKey: process.env.INNGEST_SIGNING_KEY || '',
   inngestApiUrl: process.env.INNGEST_API_URL || '',
   inngestEventKey: process.env.INNGEST_EVENT_KEY || '',
+  chromePath: process.env.CHROME_PATH || '/usr/bin/google-chrome', 
 };
 
 export default config;
