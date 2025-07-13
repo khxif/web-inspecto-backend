@@ -1,5 +1,6 @@
 import * as ChromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
+import puppeteer from 'puppeteer';
 import { auditSuggestionPrompt } from '../utils/prompts.js';
 import { auditSuggestionAgent } from './agents/suggestion-agent.js';
 import { inngest } from './client.js';
@@ -10,10 +11,15 @@ export const auditSummary = inngest.createFunction(
   { event: 'audit/audit.summary' },
   async ({ event, step }) => {
     const result = await step.run('run lighthouse', async () => {
-      const chrome = await ChromeLauncher.launch({ chromeFlags: ['--headless'] });
+      const chrome = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      });
+
+      const endpoint = chrome.wsEndpoint();
 
       const result = await lighthouse(event.data.url, {
-        port: chrome.port,
+        port: Number(new URL(endpoint).port),
         output: 'html',
         throttlingMethod: 'provided',
       });
@@ -52,7 +58,7 @@ export const auditSummary = inngest.createFunction(
 
       console.log(result?.lhr.audits['unused-javascript'].details);
 
-      chrome.kill();
+      await chrome.close();
       return response;
     });
 
