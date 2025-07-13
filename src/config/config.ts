@@ -10,6 +10,7 @@ interface Config {
   inngestEventKey: string;
   chromePath: string;
   nodeEnv: string;
+  inngestBaseUrl: string; 
 }
 
 const config: Config = {
@@ -20,6 +21,7 @@ const config: Config = {
   inngestEventKey: process.env.INNGEST_EVENT_KEY || '',
   chromePath: process.env.CHROME_PATH || '',
   nodeEnv: process.env.NODE_ENV || '',
+  inngestBaseUrl: process.env.INNGEST_BASE_URL || '',
 };
 
 console.log('config', config);
