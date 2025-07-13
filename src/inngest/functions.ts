@@ -12,6 +12,7 @@ export const auditSummary = inngest.createFunction(
       const chrome = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        executablePath: puppeteer.executablePath(),
       });
 
       const endpoint = chrome.wsEndpoint();
