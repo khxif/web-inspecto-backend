@@ -1,5 +1,5 @@
 import lighthouse from 'lighthouse';
-import puppeteer from 'puppeteer';
+import puppeteer, { executablePath } from 'puppeteer';
 import { auditSuggestionPrompt } from '../utils/prompts.js';
 import { auditSuggestionAgent } from './agents/suggestion-agent.js';
 import { inngest } from './client.js';
@@ -9,10 +9,12 @@ export const auditSummary = inngest.createFunction(
   { event: 'audit/audit.summary' },
   async ({ event, step }) => {
     const result = await step.run('run lighthouse', async () => {
+      console.log('Using Chrome path:', executablePath());
+
       const chrome = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath: puppeteer.executablePath(),
+        executablePath: executablePath(),
       });
 
       const endpoint = chrome.wsEndpoint();
