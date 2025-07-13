@@ -30,7 +30,6 @@
   },
   "dependencies": {
     "@inngest/agent-kit": "^0.9.0",
-    "chrome-launcher": "^1.2.0",
     "cors": "^2.8.5",
     "inngest": "^3.40.1",
     "lighthouse": "^12.7.1",
