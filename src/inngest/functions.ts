@@ -3,6 +3,7 @@ import lighthouse from 'lighthouse';
 import { auditSuggestionPrompt } from '../utils/prompts.js';
 import { auditSuggestionAgent } from './agents/suggestion-agent.js';
 import { inngest } from './client.js';
+import config from '../config/config.js';
 
 export const auditSummary = inngest.createFunction(
   { id: 'perform-audit' },
@@ -10,7 +11,8 @@ export const auditSummary = inngest.createFunction(
   async ({ event, step }) => {
     const result = await step.run('run lighthouse', async () => {
       const chrome = await ChromeLauncher.launch({
-        chromeFlags: ['--headless'],
+       chromeFlags: ['--headless', '--no-sandbox', '--disable-gpu'],
+        chromePath: config.chromePath,
       });
 
       const result = await lighthouse(event.data.url, {

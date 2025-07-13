@@ -16,7 +16,7 @@ const config: Config = {
   inngestSigningKey: process.env.INNGEST_SIGNING_KEY || '',
   inngestApiUrl: process.env.INNGEST_API_URL || '',
   inngestEventKey: process.env.INNGEST_EVENT_KEY || '',
-  chromePath: process.env.CHROME_PATH || '/usr/bin/google-chrome', 
+  chromePath: process.env.CHROME_PATH || '', 
 };
 
 export default config;
