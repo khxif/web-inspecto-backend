@@ -1,6 +1,5 @@
 import dotenv from 'dotenv';
-  dotenv.config();
-
+dotenv.config();
 
 interface Config {
   port: number;
@@ -10,7 +9,7 @@ interface Config {
   inngestEventKey: string;
   chromePath: string;
   nodeEnv: string;
-  inngestBaseUrl: string; 
+  inngestBaseUrl: string;
 }
 
 const config: Config = {
@@ -23,7 +22,5 @@ const config: Config = {
   nodeEnv: process.env.NODE_ENV || '',
   inngestBaseUrl: process.env.INNGEST_BASE_URL || '',
 };
-
-console.log('config', config);
 
 export default config;

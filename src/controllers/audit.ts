@@ -11,8 +11,6 @@ export const performAudit = async (req: Request, res: Response, next: NextFuncti
       data: { url },
     });
 
-    console.log(response);
-
     res.status(200).json({ eventId: response.ids[0] });
   } catch (error) {
     next(error);

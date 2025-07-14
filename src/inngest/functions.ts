@@ -1,20 +1,14 @@
-import * as ChromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
+import { chrome } from '../utils/chrome.js';
 import { auditSuggestionPrompt } from '../utils/prompts.js';
 import { auditSuggestionAgent } from './agents/suggestion-agent.js';
 import { inngest } from './client.js';
-import config from '../config/config.js';
 
 export const auditSummary = inngest.createFunction(
   { id: 'perform-audit' },
   { event: 'audit/audit.summary' },
   async ({ event, step }) => {
     const result = await step.run('run lighthouse', async () => {
-      const chrome = await ChromeLauncher.launch({
-       chromeFlags: ['--headless', '--no-sandbox', '--disable-gpu'],
-        chromePath: config.chromePath,
-      });
-
       const result = await lighthouse(event.data.url, {
         port: chrome.port,
         output: 'html',
@@ -52,8 +46,6 @@ export const auditSummary = inngest.createFunction(
           speedIndex: result?.lhr.audits['speed-index'].displayValue,
         },
       };
-
-      console.log(result?.lhr.audits['unused-javascript'].details);
 
       chrome.kill();
       return response;
